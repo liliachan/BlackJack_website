@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<!--
+	Escape Velocity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Card Advancer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper" class="wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<div id="logo">
+								<h1><a href="index.html"><font size="7">PROJECT: BLACKJACK</a></h1></font>
+								<p><font size="5">A card dealing robot</p></font>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="index.html">Home</a></li>
+									<li><a href="systems.html">Systems</a></li>
+									<li><a href="materials.html">Materials</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="team.html">Team</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+			<!-- Main -->
+				<div class="wrapper style2">
+					<div class="title">Card Advancer</div>
+					<div id="main" class="container">
+
+						<!-- Content -->
+							<div id="content">
+								<article class="box post">
+									<div>
+										<img src="images/card_advancer_no_text.jpg" alt="latest card advancer render" width = 640 height= 512 style="display:block;margin:auto;"/>
+									</div>
+										<header>
+										<h2>Description</h2>
+										</header>
+
+										<p>The card advancer is the backbone of our card dealer and its job is to precisely push one card out at a time. Throughout this project we focused on creating designs for ease of assembly and fabrication. The card advancer was made from 1/4" MDF that was lasercut in Olin's machine shop and off-the-shelf items from McMaster. The overall design of the card advancer has been through many modifications through four iterations. In our final iteration the lasercut parts were spray painted red and black for a slicker aesthetic.
+										</p>
+										<div>
+										<img src="images/sprint1.png" alt="first iteration card dealing" width = 500 height= 375 style="display:block;margin:auto;"/>
+										</div>
+										<p>
+										</p>
+										<p>
+										To be frank, in the first iteration most of it was hot glued together as you can probably tell from the picture above. But the purpose of the first iteration was to try out some ideas and see which ones might stick. Our first idea was to use a DC motor to shoot the cards out with the help of a rubberband on a wheel. The DC motor would move down with gravity as the deck of cards got smaller. However, this configuration wouldn't scale well if we wanted to increase to 4-6 decks of cards.
+										</p>
+										<div>
+										<img src="images/sprint2.png" alt="second iteration card dealing" width = 500 height= 505 style="display:block;margin:auto;"/>
+										</div>
+										<p>
+										</p>
+										<p>In the second iteration we tried to be more specific in defining what we wanted to design. Our goals were that the mechanism had to separate and deal individual cards from the deck, and had to hold as many as 6 decks of cards at a time, a pile known as a “shoe” which is something that you would find in a casino. This lead to the decision to use gravity to index cards from the shoe, which is how we came up with the 'mountain' structure. In the picture above there is a NEMA 17 stepper motor located on the bottom right. It drives a 1/2-10 lead screw that is held stationary along axis of slope with shaft collars. On the lead screw is a 3D printed holder for a lead nut guided by two linear shafts. The holder is connected to a pusher that advances the cards out of the holder at the upper left corner of the picture. There was some alignment issues with the lead screw system that we encountered because all of the gussets and support pieces were surface mounts and the MDF was slightly warped when it was lasercut. We also realized that the structure was very tall and that the length of the side of the card advancer could be shorter and still accomodate 6 decks of cards.</p>
+										<div>
+										<img src="images/sprint3.jpg" alt="third iteration card dealing" width = 500 height= 461.5 style="display:block;margin:auto;"/>
+										</div>
+										<p>
+										</p>
+										<p>
+										In the third iteration we focused on shortening the length of the card advancer while still allowing for 6 decks of cards to be stored. The height of the structure was also reduced and we talked more that on the <a href="mech_mountain_structure.html">Mountain Structure</a> page.
+										<p>The advancer pushes the shoe over the ledge of the ramp. As cards are pushed over, they fall down the ramp and get dealt out to the player. An IR reflectance sensor embedded in the ramp allows the robot to recognize when a card has been dealt and gives us more precise control over how many cards we deal. We can deal individual cards with greater than 95% consistency.
+										</p>
+										<div>
+										<img src="images/turntable_no_text_edit.jpg" alt="assemblied turntable" width = 600 height= 300 style="display:block;margin:auto;"/>
+									</div>
+										
+										<header>
+										<h2>Things to keep in mind</h2>
+										</header>
+										<p>
+										Lessons Learned: Add in some margin for error
+ 
+										Putting a method of adjusting the position of a motor is important. Using slots instead of mounting holes will allow you to adjust how the gears mesh so that they do not grind. The alignment of the linear slides and lead screw is also important because if they are even slightly out of alignment, they can be hard to turn. To get through this, we left some slack in our advancer. Not tightening everything down all the way allowed us to get the alignment with the least friction. 
+
+										</p>
+										<ul style="list-style-type:circle">
+										  <li>Make slots in parts where motors would be mounted to fine-tune its position</li>
+										  <li>Be mindful of interfering components especially screws because they're easy to forget</li>
+										  <li>When designing, keep in mind that the wires can't magically pass through your material unless you put holes in them</li>
+										  <li>Avoid painting faces of parts that would be moving against another (i.e. gears)</li>
+										</ul>
+										<header>
+										<h2>Things to try</h2>
+										</header>
+										<ul style="list-style-type:circle">
+										  <li>You can add a limit switch to the base in order to know if you have completed a full turn (we had this feature, but our code enabled us to no longer require it)</li>
+										</ul>
+										<p>
+										</p>
+
+								</article>
+							</div>
+<!-- Footer -->
+				<div id="footer-wrapper" class="wrapper">
+					<div id="copyright">
+						<ul>
+							<li>&copy; PROJECT: BLACKJACK</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
+							
+	</div>
+
+		<!-- Scripts -->
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

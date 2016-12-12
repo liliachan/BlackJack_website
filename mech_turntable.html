@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<!--
+	Escape Velocity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Turntable</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper" class="wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<div id="logo">
+								<h1><a href="index.html"><font size="7">PROJECT: BLACKJACK</a></h1></font>
+								<p><font size="5">A card dealing robot</p></font>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="index.html">Home</a></li>
+									<li><a href="systems.html">Systems</a></li>
+									<li><a href="materials.html">Materials</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="team.html">Team</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+			<!-- Main -->
+				<div class="wrapper style2">
+					<div class="title">Turntable</div>
+					<div id="main" class="container">
+
+						<!-- Content -->
+							<div id="content">
+								<article class="box post">
+									<div>
+										<img src="images/turntable_exploded.jpg" alt="exploded view of turntable" width = 640 height= 512 style="display:block;margin:auto;"/>
+									</div>
+										<header>
+										<h2>Description</h2>
+										</header>
+
+										<p>The card dealer can give each player around a table by rotating on a turntable base. The exploded view shows the different parts (without fasteners) that we used in order to achieve smooth rotation. Throughout this project we focused on creating designs for ease of assembly and fabrication. All of the fabrication for the turtable was 1/4" MDF that was lasercut in Olin's machine shop (with the exception of the sheet metal bracket that was sheared and bent) and a turntable bearing from McMaster. The overall design of the turntable portion of the card dealer hasn't changed much since the second iteration, which made it easy to transition into subsequent iterations because we would just swap out new structures on the tabletop. In the latest iteration the lasercut parts were spray painted red and black to round off our project with a polished product.
+										</p>
+										<p>Starting from the bottom we have a base where the sheet metal bracket for the NEMA 17 motor (85 oz in and 0.64A) is mounted on and the support feet fit on with mortise and tenon joints. The feet were intentionally designed to allow for a large space underneath the turntable because we originally intended to house all of the electrical components in that cavity. However, we realized that the ribbon wire for the raspberry pi camera was too short and that the wires were twisting on each other (which could've also been resolved with a slip ring). So we moved them all up to the tabletop and to the middle of the mountain structure (not pictured here).</p>
+										<p>On the next layer we have the support table that is secured onto the feet with screw-reinforced mortise and tenon joints (which we talk about more on the <a href="mech_mountain_structure.html">Mountain Structure</a> page). Both the support table and the tabletop have a large hole in the middle to allow for wires to pass through. The bottom of the turntable bearing is fastened to the support table with 8-32 screws (our standardized screw size).
+										</p>
+										<p>Moving up some more we have the turntable bearing, the ring gear, spacer ring, and the table top. These are all fastened together by 1/4-20 screws going into threaded holes in the turntable bearing. It was important to get the alignment of the holes for the 1/4-20s rather precise otherwise the ring gear and the driving gear would grind. In retrospect it would've been helpful to have slots in the base where the motor bracket was mounted to fine-tune the position of the gears. The driving gear is attached to the stepper motor with a 3D printed hub and a set screw. Both the ring gear and the driving gear were lasercut 1/4" MDF like most of the structure, but they were not painted to avoid another reason for grinding. The spacer ring was made in the latest iteration to avoid having to countersink screw holes on the bottom of the tabletop to prevent interference of the screw heads on the driving gear. 
+										<div>
+										<img src="images/turntable_no_text_edit.jpg" alt="assemblied turntable" width = 600 height= 300 style="display:block;margin:auto;"/>
+									</div>
+										</p>
+										<header>
+										<h2>Things to keep in mind</h2>
+										</header>
+										<ul style="list-style-type:circle">
+										  <li>Make slots in parts where motors would be mounted to fine-tune its position</li>
+										  <li>Be mindful of interfering components especially screws because they're easy to forget</li>
+										  <li>When designing, keep in mind that the wires can't magically pass through your material unless you put holes in them</li>
+										  <li>Avoid painting faces of parts that would be moving against another (i.e. gears)</li>
+										</ul>
+										<header>
+										<h2>Things to try</h2>
+										</header>
+										<ul style="list-style-type:circle">
+										  <li>You can add a limit switch to the base in order to know if you have completed a full turn (we had this feature, but our code enabled us to no longer require it)</li>
+										</ul>
+										<p>
+										</p>
+
+								</article>
+							</div>
+<!-- Footer -->
+				<div id="footer-wrapper" class="wrapper">
+					<div id="copyright">
+						<ul>
+							<li>&copy; PROJECT: BLACKJACK</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
+							
+	</div>
+
+		<!-- Scripts -->
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
