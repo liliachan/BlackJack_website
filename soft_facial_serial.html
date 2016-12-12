@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+	Escape Velocity by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Facial Recognition and Serial Communication</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+	</head>
+	<body class="homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper" class="wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<div id="logo">
+								<h1><a href="index.html"><font size="7">PROJECT: BLACKJACK</a></h1></font>
+								<p><font size="5">A card dealing robot</p></font>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="index.html">Home</a></li>
+									<li><a href="systems.html">Systems</a></li>
+									<li><a href="materials.html">Materials</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="team.html">Team</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+			<!-- Main -->
+				<div class="wrapper style2">
+					<div class="title">Facial Recognition and Serial Communication</div>
+					<div id="main" class="container">
+
+						<!-- Content -->
+							<div id="content">
+								<article class="box post">
+									<div>
+										<img src="images/serial.png" alt="serial diagram" width = 763 height= 243 style="display:block;margin:auto;"/>
+									</div>
+										<header>
+										<h2>Description</h2>
+										</header>
+
+										<p>At the beginning of gameplay, we detect players around a table using facial recognition that is running on the Raspberry Pi powered by a computer vision library, called OpenCV. When the camera on the Raspberry Pi finds a player, it communicates with the Arduino that someone is sitting in a given location. This communication happens over serial. The Raspberry Pi records the amount of steps it has taken since the beginning and deals the appropriate amount of cards to the player that it has found. During gameplay, the Arduino will use these positions to know where to go back to. Facial detection, which hasn't changed much since its first iteration, attempts to find a face on the screen. When it finds one, it draws a red box around it. If the center of this red box passes through the center of the screen (which is represented by a green box), it registers this as a new player. 
+										</p>
+										<p>The communication as well as the relationship between the Raspberry Pi and the Arduino has changed form a lot during our four sprints. In its first state, the Raspberry Pi had all of the logic for playing different games and the Arduino was essentially just tasked with rotating motors when it received certain inputs from the Raspberry Pi. The Raspberry Pi was being powered by a state machine that was created using game rules contained in json files. The communication was facilitated via USB using the RS232 serial protocol in conjunction with the pySerial library on the Raspberry Pi and Arduino's built in serial library.
+										</p>
+										<p>While this design allowed us a lot of flexibility in terms of providing the system with new game logic as well as providing a lot of interesting avenues for interacting with the system (i.e. web interfaces to program new games, voice commands with powerful APIs in Python, etc), it also required the creation of "micro-states." Since the Arduino could only dispense a card and rotate, every state on the Raspberry Pi had to be some combination of those functions, often requiring several serial messages to be passed before the state machine was able to advance states. The amount of serial commands that we were sending slowed the system down considerably because of the amount of the data that needs to be passed to facilitate RS232 communication given that it is asynchronous. This was especially apparent when we first integrated facial recognition, since the system takes small steps while scanning for faces. It took roughly six minutes to complete a full rotation of facial recognition because of this.
+										</p>
+										<p>As a result, we decided to transition to alternative, lower-overhead types of serial communication. The two communication protocols that we tried were SPI and I2C. Both of these communication protocols are synchronous protocols that rely on a master-slave relationship. For both protocols, we used the Raspberry Pi as the master and the Arduino as the slave. We were able to drastically reduce the amount of time required to communicate between the Raspberry Pi and the Arduino; however, we ran into other issues. I2C did not work since the Arduino uses I2C to communicate with the motorshield and motors. In this communication loop, the Arduino is the master, so it cannot be the slave in another communication loop. This would've been solvable by making the Raspberry Pi the slave. However, the hardware on the Raspberry Pi doesn't support this. When we tried transitioning to SPI, an unforseen electrical failure fried the pins required for SPI on the Raspberry Pi.
+										</p>
+										<p>
+										Running out of options, we transitioned back to RS232, however, in addition to an overhaul of the way in which both the Arduino and Raspberry Pi handled and sent serial messages, we made changes in the overall system design to better support a slightly more verbose serial protocol like RS232. First, we moved all of the game logic off of the Raspberry Pi and onto the Arduino. While this removed a lot of the flexibility we had in terms of playing different types of games, it was apparent that we were in a slight time crunch that wouldn't allow us to better utilize this feature anyway. We also made sure that both the Arduino and Raspberry Pi better maintained their serial buffers to avoid slowing down too much. The new system only communicates over serial during the facial detection stage, which limits the requirement for serial communcation, which can slow down the system immensely.
+										</p>
+
+										<header>
+										<h2>Things to keep in mind</h2>
+										</header>
+										<ul style="list-style-type:circle">
+										  <li>There are many different flavors of serial communication. All of them have downsides and upsides. For example, RS232 is simpler to implement but is not synchronous and can bog down serial buffers. I2C is ideal for back and forth communication but can't always be implemented. SPI is quick, but is a bit unpredictable, since it does not feature call-and-response style communication like I2C</li>
+										  <li>Maintain your serial buffer. Make sure the input buffer is being cleared so that you're getting what you think you're getting</li>
+										  <li>Try to minimize the amount of logic that needs to be transferred. Things should be relatively self-contained.</li>
+										</ul>
+										
+										<p>
+										</p>
+
+								</article>
+							</div>
+<!-- Footer -->
+				<div id="footer-wrapper" class="wrapper">
+					<div id="copyright">
+						<ul>
+							<li>&copy; PROJECT: BLACKJACK</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
+							
+	</div>
+
+		<!-- Scripts -->
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -55,7 +55,7 @@
 										<h2>Description</h2>
 										</header>
 
-										<p>The card advancer is the backbone of our card dealer and its job is to precisely push one card out at a time. Throughout this project we focused on creating designs for ease of assembly and fabrication. The card advancer was made from 1/4" MDF that was lasercut in Olin's machine shop and off-the-shelf items from McMaster. The overall design of the card advancer has been through many modifications through four iterations. In our final iteration the lasercut parts were spray painted red and black for a slicker aesthetic.
+										<p>The card advancer is the backbone of our card dealer and its job is to precisely push one card out at a time. Throughout this project we focused on creating designs for ease of assembly and fabrication. The card advancer was made from 1/4" MDF that was lasercut in Olin's machine shop, off-the-shelf items from McMaster, and fastened all together with 8-32 screws and square nuts. The overall design of the card advancer has been through many modifications through four iterations. In our final iteration the lasercut parts were spray painted red and black for a slicker aesthetic.
 										</p>
 										<div>
 										<img src="images/sprint1.png" alt="first iteration card dealing" width = 500 height= 375 style="display:block;margin:auto;"/>
@@ -63,48 +63,40 @@
 										<p>
 										</p>
 										<p>
-										To be frank, in the first iteration most of it was hot glued together as you can probably tell from the picture above. But the purpose of the first iteration was to try out some ideas and see which ones might stick. Our first idea was to use a DC motor to shoot the cards out with the help of a rubberband on a wheel. The DC motor would move down with gravity as the deck of cards got smaller. However, this configuration wouldn't scale well if we wanted to increase to 4-6 decks of cards.
+										To be frank, in the first iteration most of it was hot glued together as you can probably tell from the picture above. But the purpose of the first iteration was to try out some ideas and see which ones might stick. Our first idea was to use a DC motor to shoot the cards out with the help of a rubberband on a wheel. The DC motor would move down with gravity as the deck of cards got smaller. However, this configuration wouldn't scale well if we wanted to increase to 4-6 decks of cards and the cards were flipping over.
 										</p>
 										<div>
 										<img src="images/sprint2.png" alt="second iteration card dealing" width = 500 height= 505 style="display:block;margin:auto;"/>
 										</div>
 										<p>
 										</p>
-										<p>In the second iteration we tried to be more specific in defining what we wanted to design. Our goals were that the mechanism had to separate and deal individual cards from the deck, and had to hold as many as 6 decks of cards at a time, a pile known as a “shoe” which is something that you would find in a casino. This lead to the decision to use gravity to index cards from the shoe, which is how we came up with the 'mountain' structure. In the picture above there is a NEMA 17 stepper motor located on the bottom right. It drives a 1/2-10 lead screw that is held stationary along axis of slope with shaft collars. On the lead screw is a 3D printed holder for a lead nut guided by two linear shafts. The holder is connected to a pusher that advances the cards out of the holder at the upper left corner of the picture. There was some alignment issues with the lead screw system that we encountered because all of the gussets and support pieces were surface mounts and the MDF was slightly warped when it was lasercut. We also realized that the structure was very tall and that the length of the side of the card advancer could be shorter and still accomodate 6 decks of cards.</p>
+										<p>In the second iteration we tried to be more specific in defining what we wanted to design. Our goals were that the mechanism had to separate and deal individual cards from the deck, not flip the cards over, and had to hold as many as 6 decks of cards at a time, a pile known as a “shoe” which is something that you would find in a casino. This lead to the decision to use gravity to index cards from the shoe, which is how we came up with the 'mountain' structure and you can find more about that on the <a href="mech_mountain_structure.html">Mountain Structure</a> page. The gussets and shaft support plates were lasercut out of 1/4" MDF and wiring pathways were added for the motor. In the picture above there is a NEMA 17 stepper motor located on the bottom right. It drives a 1/2-10 lead screw that is held stationary along axis of slope with shaft collars. On the lead screw is a 3D printed holder for a lead nut guided by two linear shafts. The holder is connected to a pusher that advances the shoe over the ledge of the ramp. As cards are pushed over, they fall down the ramp and get dealt out to the player. For us the slide was the perfect solution to prevent the cards from flipping over. There was some alignment issues with the lead screw system because all of the gussets and support pieces were surface mounts and the MDF was slightly warped when it was lasercut. We also realized that the structure was very tall and that the length of the side of the card advancer could be shorter and still accomodate 6 decks of cards. Another observation was that the bottom of the cards were experiencing friction with the MDF base plate because when we reversed the card advancer, the tops of the cards would move back but the bottoms stayed in the same position.</p>
 										<div>
 										<img src="images/sprint3.jpg" alt="third iteration card dealing" width = 500 height= 461.5 style="display:block;margin:auto;"/>
 										</div>
 										<p>
 										</p>
-										<p>
-										In the third iteration we focused on shortening the length of the card advancer while still allowing for 6 decks of cards to be stored. The height of the structure was also reduced and we talked more that on the <a href="mech_mountain_structure.html">Mountain Structure</a> page.
-										<p>The advancer pushes the shoe over the ledge of the ramp. As cards are pushed over, they fall down the ramp and get dealt out to the player. An IR reflectance sensor embedded in the ramp allows the robot to recognize when a card has been dealt and gives us more precise control over how many cards we deal. We can deal individual cards with greater than 95% consistency.
-										</p>
+										<p>In the third iteration we focused on shortening the length of the card advancer while still allowing for 6 decks of cards to be stored. In the picture above you can see that the height of the structure was also reduced and you can find more about that on the <a href="mech_mountain_structure.html">Mountain Structure</a> page. This time the base plate was cut out of acrylic to reduce the friction with the bottom of the cards and it worked pretty well. To address the issue of reliably dealing one card at a time, an IR reflectance sensor was embedded in the ramp to allow the robot to recognize when a card has been dealt (you can find more about that on the <a href="elec_IR_sensors.html">IR Reflectance Sensors</a> page). The gussets holding the support plates for the lead screw and linear shafts were made with tenon joints this time to fit into the base plate for better stability. However, the support plates are still surface mounts so that we could adjust them to fine-tune the alignment of the lead screw and linear shafts. The friction was greatly reduced, but there would still be an occassional 'bump' of friction that you could feel for every turn of the lead screw. However, we made the assumption that our stepper motor could overcome this friction because it's holding torque was 63 oz-in, which we thought was sufficient. Unfortunately, it did occasionally stall because we were taking such small steps (about 4 steps per attempt to advance a card). On top of that we forgot to check the current rating on that stepper motor, which was 2A, and check it with our Adafruit Arduino Motorshield v2, which could only handle 1.2A, for compatibility. So both our stepper motor and our motorshield failed and needed to be replaced.
 										<div>
-										<img src="images/turntable_no_text_edit.jpg" alt="assemblied turntable" width = 600 height= 300 style="display:block;margin:auto;"/>
-									</div>
+											<img src="images/card_advancer_text_edit.jpg" alt="latest card advancer render" width = 600 height= 480 style="display:block;margin:auto;"/>
+										</div>
+										<p>
+										</p>
+										<p>For the latest iteration the general structure of the card advancer didn't change much. We added limit switches to the extremes that the lead nut holder could travel so that we could reset it's position at the end of a game and prevent it from driving into the support plates. We bought a new NEMA 17 stepper motor with a current rating of 1.2A and a holding torque of 44 oz-in. We also introduced some compliance into the lead screw system so that there was little to no friction. We could have been bending the linear shafts in the previous iterations so we removed the bushings for the linear shafts in the lead nut holder. We also didn't fasten on the card pusher too tightly because now the lead nut holder can rock side to side a little. So if the card pusher was screwed on tightly, the bottom of it would want to bite into the base plate. It worked out quite beautifully because the bottom of the card pusher rests on the base plate and there is no side loading so it still remains square. As we were running our card dealer we also realized that the gears lasercut out of MDF were very loud (it was probably loude before but we were most likely distracted by the fact that it was working) so we considered plastic options. The gears weren't grinding, but rather rattling and it resonanted through the structure. So we lasercut some acrylic gears and it seems a bit better, but in the future we would want to try nylon gears. 
+										</p>
 										
 										<header>
 										<h2>Things to keep in mind</h2>
 										</header>
-										<p>
-										Lessons Learned: Add in some margin for error
- 
-										Putting a method of adjusting the position of a motor is important. Using slots instead of mounting holes will allow you to adjust how the gears mesh so that they do not grind. The alignment of the linear slides and lead screw is also important because if they are even slightly out of alignment, they can be hard to turn. To get through this, we left some slack in our advancer. Not tightening everything down all the way allowed us to get the alignment with the least friction. 
-
-										</p>
 										<ul style="list-style-type:circle">
+											<li>check the current rating on your motors to ensure that it's compatible with your motor controller</li>
 										  <li>Make slots in parts where motors would be mounted to fine-tune its position</li>
-										  <li>Be mindful of interfering components especially screws because they're easy to forget</li>
+										  <li>Be mindful of shaft alignments, either be very precise or introduce some compliance</li>
 										  <li>When designing, keep in mind that the wires can't magically pass through your material unless you put holes in them</li>
+										  <li>Make sure that the MDF you are lasercutting is flat to avoid warped pieces</li>
 										  <li>Avoid painting faces of parts that would be moving against another (i.e. gears)</li>
 										</ul>
-										<header>
-										<h2>Things to try</h2>
-										</header>
-										<ul style="list-style-type:circle">
-										  <li>You can add a limit switch to the base in order to know if you have completed a full turn (we had this feature, but our code enabled us to no longer require it)</li>
-										</ul>
+										
 										<p>
 										</p>
 
